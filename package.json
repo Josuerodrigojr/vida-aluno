@@ -1,0 +1,21 @@
+{
+  "name": "vida-aluno",
+  "version": "1.0.0",
+  "description": "Este README contém uma lista de tarefas e subtarefas para orientar o desenvolvimento do seu projeto web. Certifique-se de marcar cada tarefa à medida que for concluída.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "start": "./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "knex": "^3.0.1"
+  }
+}
