@@ -4,7 +4,8 @@
 
 create table professores(
 id serial primary key,
-  nome text not null,
+  primeiroNome text not null,
+  segundoNome text not null,
   turmas text not null,
   materia text not null,
   email text unique, 
@@ -16,7 +17,8 @@ id serial primary key,
 
 create table alunos(
 id serial primary key,
-  nome text not null,
+  primeiroNome text not null,
+  segundoNome text not null,
   turma text not null,
   email text unique, 
   senha text not null

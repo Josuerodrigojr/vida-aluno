@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config()
 const cors = require('cors')
 const rotasProfessores = require('./rotas/professores')
 const rotasAlunos = require('./rotas/alunos')
