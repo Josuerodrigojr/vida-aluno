@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt')
 const { buscarProfessorPor } = require("../banco/select");
 const { cadastrarProfessor } = require('../banco/insert');
+const { atualizarProfessor } = require('../banco/update');
+const {excluirProfessor} = require('../banco/delete')
 
 
 const buscarProfessorPorID = async (req,res)=>{
@@ -42,7 +44,7 @@ const registrarProfessor = async (req,res)=>{
 
 
         if (professorCadastrado){
-        return res.status(201).json(professorCadastrado)
+        return res.status(201).json()
 }
         
 
@@ -52,4 +54,54 @@ const registrarProfessor = async (req,res)=>{
     }
 }
 
-module.exports = {buscarProfessorPorID, registrarProfessor}
+const alterarProfessor = async (req,res)=>{
+const {id} = req.params
+
+try{
+    const professor = await buscarProfessorPor({id})
+
+    if (!professor){
+        return res.status(404).json({mensagem: "Professor não encontrado!"})
+    }
+    let {primeiroNome, segundoNome, turmas, materia, email, senha} = req.body
+    
+    if (email){
+    const emailProfessor = await buscarProfessorPor({email})
+        
+    if(emailProfessor){
+        return res.status(404).json({mensagem: "Email já está registrado"})
+    }}
+
+if (senha){
+        senha = await bcrypt.hash(senha, 10)
+}
+    const novoProfessor = await atualizarProfessor(id, primeiroNome, segundoNome, turmas, materia, email, senha)
+    
+    if (novoProfessor){
+        return res.status(200).json(novoProfessor)
+    }
+
+} catch(erro){
+    return res.status(500).json({mensagem: "Erro interno no servidor."})
+}
+}
+
+const deletarProfessor = async (req,res)=>{
+    const {id} = req.params
+    try{
+        const professor = await buscarProfessorPor({id})
+
+        if (!professor){
+            return res.status(404).json({mensagem: "Professor não encontrado!"})
+        }
+
+        await excluirProfessor(id)
+
+        return res.status(201).json()
+
+    } catch(erro){
+        return res.status(500).json({mensagem: 'Erro ao servidor!'})
+    }
+}
+
+module.exports = {buscarProfessorPorID, registrarProfessor, alterarProfessor, deletarProfessor}

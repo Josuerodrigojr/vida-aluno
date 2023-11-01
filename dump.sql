@@ -8,7 +8,7 @@ id serial primary key,
   segundoNome text not null,
   turmas text not null,
   materia text not null,
-  email text unique, 
+  email text, 
   senha text not null
   
 );
@@ -20,8 +20,9 @@ id serial primary key,
   primeiroNome text not null,
   segundoNome text not null,
   turma text not null,
-  email text unique, 
-  senha text not null
+  email text, 
+  senha text not null,
+  cpf char(11)
   
 );
 

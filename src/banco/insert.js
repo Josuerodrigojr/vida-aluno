@@ -3,8 +3,7 @@ const bd = require("../bancoDeDados/bancoDeDados");
 
 const cadastrarProfessor = async(primeiroNome, segundoNome, turmas, materia, email, senha)=>{
 
-    
-   return bd('professores').insert([
+   return  await bd('professores').insert([
     {
       primeironome: primeiroNome,
       segundonome: segundoNome,
@@ -17,4 +16,19 @@ const cadastrarProfessor = async(primeiroNome, segundoNome, turmas, materia, ema
 
 }
 
-module.exports = {cadastrarProfessor}
+const cadastrarAluno = async(primeiroNome, segundoNome, turma, email, senha, cpf)=>{
+
+  return  await bd('alunos').insert([
+   {
+     primeironome: primeiroNome,
+     segundonome: segundoNome,
+     turma,
+     cpf,
+     email,
+     senha
+   }
+ ]).returning('*')
+
+}
+
+module.exports = {cadastrarProfessor, cadastrarAluno}
