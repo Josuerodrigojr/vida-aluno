@@ -3,6 +3,7 @@ const { buscarComportamentoAluno , buscarAlunos, buscarAlunosPor} = require("../
 const bcrypt = require('bcrypt')
 const { atualizarAluno } = require("../banco/update")
 const { excluirAluno } = require("../banco/delete")
+const MSG = require("../helpers/MSG")
 
 
 const comportamentoAluno = async (req,res)=>{
@@ -14,7 +15,7 @@ const comportamentoAluno = async (req,res)=>{
       
         res.status(200).json(comportamento)
     } catch{
-        res.status(500).json("Erro no servidor")
+        res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 
@@ -23,7 +24,7 @@ const mostrarAlunos = async(req,res)=>{
         const alunos = await buscarAlunos()
         return res.status(200).json(alunos)
     } catch (erro){
-        return res.status(500).json({mensagem: "Erro interno no servidor"})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 
@@ -33,12 +34,12 @@ const registrarAlunos = async(req,res)=>{
         const emailAluno = await buscarAlunosPor({email})
 
         if (emailAluno){
-            return res.status(404).json({mensagem: "O email já está cadastrado"})
+            return res.status(404).json({mensagem: MSG.emailCadastrado})
         }
         const cpfAluno = await buscarAlunosPor({cpf})
 
         if (cpfAluno){
-            return res.status(404).json({mensagem: "O cpf já está cadastrado"})
+            return res.status(404).json({mensagem: MSG.cpfCadastrado})
         }
 
         const senhaCriptografada = await bcrypt.hash(senha, 10)
@@ -49,7 +50,7 @@ const registrarAlunos = async(req,res)=>{
 
 
     } catch(erro){
-        return res.status(500).json({mensagem: "Erro no servidor"})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 
@@ -60,7 +61,7 @@ const alterarAluno = async (req,res)=>{
         const aluno = await buscarAlunosPor({id})
     
         if (!aluno){
-            return res.status(404).json({mensagem: "Aluno não encontrado!"})
+            return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
         }
         let {primeiroNome, segundoNome, turma, email, senha, cpf} = req.body
         
@@ -68,7 +69,7 @@ const alterarAluno = async (req,res)=>{
         const emailAluno = await buscarAlunosPor({email})
             
         if(emailAluno){
-            return res.status(404).json({mensagem: "Email já está registrado"})
+            return res.status(404).json({mensagem: MSG.emailCadastrado})
         }}
     
     if (senha){
@@ -81,7 +82,7 @@ const alterarAluno = async (req,res)=>{
         }
     
     } catch(erro){
-        return res.status(500).json({mensagem: "Erro interno no servidor."})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
     }
 
@@ -91,14 +92,14 @@ const deletarAluno = async(req,res)=>{
         const aluno = await buscarAlunosPor({id})
     
         if (!aluno){
-            return res.status(404).json({mensagem: "Aluno não encontrado!"})
+            return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
         }
 
         await excluirAluno(id)
 
         return res.status(201).json()
     } catch (erro){
-        return res.status(500).json({mensagem: "Erro interno ao servidor."})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 

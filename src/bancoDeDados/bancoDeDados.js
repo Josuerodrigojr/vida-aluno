@@ -1,11 +1,11 @@
 const bd = require('knex')({
     client: 'pg',
     connection: {
-      host: "isabelle.db.elephantsql.com",
-      user: "hxvvnnzy",
-      password: "pJzESIoLPJZP_eAx62PzMUoSx3cUUe3n",
-      database: "hxvvnnzy",
-      port: "5432",
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      port: process.env.DB_PORT,
       ssl: { rejectUnauthorized: false }
     }
   })

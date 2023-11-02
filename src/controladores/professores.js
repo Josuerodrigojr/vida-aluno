@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt')
 const { buscarProfessorPor } = require("../banco/select");
 const { cadastrarProfessor } = require('../banco/insert');
 const { atualizarProfessor } = require('../banco/update');
-const {excluirProfessor} = require('../banco/delete')
+const {excluirProfessor} = require('../banco/delete');
+const MSG = require('../helpers/MSG');
 
 
 const buscarProfessorPorID = async (req,res)=>{
@@ -19,7 +20,7 @@ const professor = {
         res.status(200).json(professor)
 
     } catch{
-        return res.status(500).json({mensagem: "Erro no servidor"})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 
@@ -28,13 +29,13 @@ const registrarProfessor = async (req,res)=>{
 
     try{
         if(!primeiroNome || !segundoNome || !turmas || !materia || !email || !senha){
-            return res.status(404).json({mensagem: "Campos obrigatórios estão em branco"})
+            return res.status(404).json({mensagem: MSG.camposObrigatorio})
         }
         
         const emailProfessor = await buscarProfessorPor({email})
         
         if(emailProfessor){
-            return res.status(404).json({mensagem: "Email já está registrado"})
+            return res.status(404).json({mensagem: MSG.emailCadastrado})
         }
 
         const senhaCriptografada = await bcrypt.hash(senha, 10)
@@ -50,7 +51,7 @@ const registrarProfessor = async (req,res)=>{
 
 
     } catch(erro){
-        return res.status(500).json({mensagem: "Erro no servidor"})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 
@@ -61,7 +62,7 @@ try{
     const professor = await buscarProfessorPor({id})
 
     if (!professor){
-        return res.status(404).json({mensagem: "Professor não encontrado!"})
+        return res.status(404).json({mensagem: MSG.professorNaoEncontrado})
     }
     let {primeiroNome, segundoNome, turmas, materia, email, senha} = req.body
     
@@ -69,7 +70,7 @@ try{
     const emailProfessor = await buscarProfessorPor({email})
         
     if(emailProfessor){
-        return res.status(404).json({mensagem: "Email já está registrado"})
+        return res.status(404).json({mensagem: MSG.emailCadastrado})
     }}
 
 if (senha){
@@ -82,7 +83,7 @@ if (senha){
     }
 
 } catch(erro){
-    return res.status(500).json({mensagem: "Erro interno no servidor."})
+    return res.status(500).json({mensagem: MSG.erroNoServidor})
 }
 }
 
@@ -92,7 +93,7 @@ const deletarProfessor = async (req,res)=>{
         const professor = await buscarProfessorPor({id})
 
         if (!professor){
-            return res.status(404).json({mensagem: "Professor não encontrado!"})
+            return res.status(404).json({mensagem: MSG.professorNaoEncontrado})
         }
 
         await excluirProfessor(id)
@@ -100,7 +101,7 @@ const deletarProfessor = async (req,res)=>{
         return res.status(201).json()
 
     } catch(erro){
-        return res.status(500).json({mensagem: 'Erro ao servidor!'})
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
     }
 }
 

@@ -6,9 +6,13 @@ const validarToken = require('../validacao/validarToken');
 
 const rotasProfessores = express()
 
-rotasProfessores.get('/professores', validarToken,buscarProfessorPorID)
+
 rotasProfessores.post('/professores', registrarProfessor)
 rotasProfessores.post('/professores/login', login)
+
+
+// rotasProfessores.use(validarToken)
+rotasProfessores.get('/professores',buscarProfessorPorID)
 rotasProfessores.patch('/professores/:id', alterarProfessor)
 rotasProfessores.delete('/professores/:id', deletarProfessor)
 

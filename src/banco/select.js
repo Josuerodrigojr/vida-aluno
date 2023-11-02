@@ -11,6 +11,7 @@ const buscarComportamentoAluno = async(id)=>{
 }
 
 const buscarAlunosPor = async(busca)=>{
+
     return await bd('alunos').where(busca).first()
 
 }
@@ -19,6 +20,19 @@ const buscarAlunos = async()=>{
     return await bd('alunos').returning("*")
 }
 
-module.exports = {buscarProfessorPor, buscarComportamentoAluno, buscarAlunos, buscarAlunosPor}
+const buscarComportamentoPor = async(busca)=>{
+
+    return await bd('caderneta').where(busca)
+}
+
+const buscarTurma = async(turma)=>{
+    return await bd.column('primeironome', 'segundonome', 'turma', 'email').select().from('alunos').where(turma)
+
+}
+
+
+
+
+module.exports = {buscarProfessorPor, buscarComportamentoAluno, buscarAlunos, buscarAlunosPor, buscarComportamentoPor, buscarTurma}
 
 
