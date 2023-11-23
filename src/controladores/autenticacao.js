@@ -8,6 +8,7 @@ const login = async (req, res) => {
   console.log(email,senha)
     try {
       const usuario = await buscarProfessorPor({ email });
+      console.log(usuario)
 
   
       if (!usuario) {
