@@ -15,7 +15,7 @@ const loginAluno = async(req,res)=>{
             return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
         }
 
-        return res.status(200).json({mensagem: aluno})
+        return res.status(200).json(aluno)
 
 
 
