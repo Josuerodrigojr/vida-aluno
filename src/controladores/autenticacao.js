@@ -5,7 +5,7 @@ const {buscarProfessorPor} = require('../banco/select')
 const login = async (req, res) => {
     const { email, senha } = req.body;
 
-  console.log(email,senha)
+
     try {
       const usuario = await buscarProfessorPor({ email });
       console.log(usuario)
