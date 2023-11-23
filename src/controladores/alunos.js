@@ -8,10 +8,9 @@ const MSG = require("../helpers/MSG")
 
 const comportamentoAluno = async (req,res)=>{
     try{
-        
-        const {cpf} = req.body
+        const id = 1
 
-        const comportamento = await buscarComportamentoAluno(cpf)
+        const comportamento = await buscarComportamentoAluno(id)
         console.log(comportamento)
       
         res.status(200).json(comportamento)

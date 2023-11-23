@@ -8,9 +8,10 @@ const rotasAlunos = express()
 
 // rotasAlunos.use(validarToken)
 
-
-rotasAlunos.post('/alunos/comportamento', comportamentoAluno)
-
+rotasAlunos.get('/', (req,res)=>{
+    return res.send(200).send('foi')
+})
+rotasAlunos.get('/alunos/comportamento', comportamentoAluno)
 rotasAlunos.get('/alunos', mostrarAlunos)
 rotasAlunos.post('/alunos', registrarAlunos )
 rotasAlunos.patch('/alunos/:id', alterarAluno) 
