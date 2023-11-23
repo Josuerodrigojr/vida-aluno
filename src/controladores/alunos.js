@@ -5,6 +5,24 @@ const { atualizarAluno } = require("../banco/update")
 const { excluirAluno } = require("../banco/delete")
 const MSG = require("../helpers/MSG")
 
+const loginAluno = async(req,res)=>{
+    try{
+        const {cpf} = req.body;
+
+        const aluno = await buscarAlunosPor({cpf})
+
+        if (!aluno){
+            return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
+        }
+
+        return res.status(200).json({mensagem: aluno})
+
+
+
+    } catch{
+        res.status(500).json({mensagem: MSG.erroNoServidor})
+    }
+}
 
 const comportamentoAluno = async (req,res)=>{
     try{
