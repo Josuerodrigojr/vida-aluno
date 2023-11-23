@@ -13,7 +13,7 @@ rotasAlunos.get('/', (req,res)=>{
 })
 rotasAlunos.get('/alunos/comportamento', comportamentoAluno)
 rotasAlunos.get('/alunos', mostrarAlunos)
-rotasAlunos.post('alunos/login', loginAluno)
+rotasAlunos.post('/alunos/login', loginAluno)
 rotasAlunos.post('/alunos', registrarAlunos )
 rotasAlunos.patch('/alunos/:id', alterarAluno) 
 rotasAlunos.delete('/alunos/:id', deletarAluno)

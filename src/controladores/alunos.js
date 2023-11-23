@@ -6,10 +6,13 @@ const { excluirAluno } = require("../banco/delete")
 const MSG = require("../helpers/MSG")
 
 const loginAluno = async(req,res)=>{
+    const {cpf} = req.body;
     try{
-        const {cpf} = req.body;
+
+        console.log(cpf)
 
         const aluno = await buscarAlunosPor({cpf})
+        console.log(aluno) 
 
         if (!aluno){
             return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
