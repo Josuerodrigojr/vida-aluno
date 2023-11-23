@@ -9,7 +9,8 @@ const rotasAlunos = express()
 // rotasAlunos.use(validarToken)
 
 
-rotasAlunos.get('/alunos/comportamento', comportamentoAluno)
+rotasAlunos.post('/alunos/comportamento', comportamentoAluno)
+
 rotasAlunos.get('/alunos', mostrarAlunos)
 rotasAlunos.post('/alunos', registrarAlunos )
 rotasAlunos.patch('/alunos/:id', alterarAluno) 
