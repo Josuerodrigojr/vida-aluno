@@ -121,4 +121,4 @@ const deletarAluno = async(req,res)=>{
     }
 }
 
-module.exports = {comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno}
+module.exports = {comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno, loginAluno}

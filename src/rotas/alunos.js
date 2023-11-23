@@ -1,5 +1,5 @@
 const express = require('express')
-const { comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno } = require('../controladores/alunos')
+const { comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno, loginAluno } = require('../controladores/alunos')
 const validarToken = require('../validacao/validarToken')
 
 const rotasAlunos = express()
@@ -13,7 +13,7 @@ rotasAlunos.get('/', (req,res)=>{
 })
 rotasAlunos.get('/alunos/comportamento', comportamentoAluno)
 rotasAlunos.get('/alunos', mostrarAlunos)
-rotasAlunos.post('alunos/login')
+rotasAlunos.post('alunos/login', loginAluno)
 rotasAlunos.post('/alunos', registrarAlunos )
 rotasAlunos.patch('/alunos/:id', alterarAluno) 
 rotasAlunos.delete('/alunos/:id', deletarAluno)
