@@ -113,7 +113,7 @@ const buscarTurmasPorEmail = async (req,res)=>{
         if (turmas.length <1 ){
             return res.status(200).json({mensagem:'Não tem turmas cadastradas'})
         }
-        console.log(turmas)
+        return res.status(200).json(turmas)
 
     } catch (erro){
         
