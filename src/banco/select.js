@@ -30,9 +30,17 @@ const buscarTurma = async(turma)=>{
 
 }
 
+const buscarTurmaPorEmail = async(email) =>{
+
+   const turmasString = await bd.column('turmas').select().from('professores').where(email)
+   const turmasArray = turmasString[0].turmas.split(',')
+   console.log(turmasArray)
+   return turmasArray
+}
 
 
 
-module.exports = {buscarProfessorPor, buscarComportamentoAluno, buscarAlunos, buscarAlunosPor, buscarComportamentoPor, buscarTurma}
+
+module.exports = {buscarProfessorPor, buscarComportamentoAluno, buscarAlunos, buscarAlunosPor, buscarComportamentoPor, buscarTurma, buscarTurmaPorEmail}
 
 

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const { buscarProfessorPor } = require("../banco/select");
+const { buscarProfessorPor, buscarTurmaPorEmail } = require("../banco/select");
 const { cadastrarProfessor } = require('../banco/insert');
 const { atualizarProfessor } = require('../banco/update');
 const {excluirProfessor} = require('../banco/delete');
@@ -105,4 +105,20 @@ const deletarProfessor = async (req,res)=>{
     }
 }
 
-module.exports = {buscarProfessorPorID, registrarProfessor, alterarProfessor, deletarProfessor}
+const buscarTurmasPorEmail = async (req,res)=>{
+    const {email} = req.body
+    try{
+
+        const turmas = await buscarTurmaPorEmail({email})
+        if (turmas.length <1 ){
+            return res.status(200).json({mensagem:'Não tem turmas cadastradas'})
+        }
+        console.log(turmas)
+
+    } catch (erro){
+        
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
+    }
+}
+
+module.exports = {buscarProfessorPorID, registrarProfessor, alterarProfessor, deletarProfessor, buscarTurmasPorEmail}
