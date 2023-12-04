@@ -124,4 +124,20 @@ const deletarAluno = async(req,res)=>{
     }
 }
 
-module.exports = {comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno, loginAluno}
+const detalharAluno = async(req,res)=>{
+    const {id} = req.query
+    try{
+        const aluno = await buscarAlunosPor({id})
+        if (!aluno){
+            return res.status(404).json({mensagem: MSG.alunoNaoEncontrado})
+        }
+
+        return res.status(200).json(aluno)
+
+
+    }catch (erro){
+        return res.status(500).json({mensagem: MSG.erroNoServidor})
+    }
+}
+
+module.exports = {detalharAluno, comportamentoAluno, mostrarAlunos, registrarAlunos, alterarAluno, deletarAluno, loginAluno}
