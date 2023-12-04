@@ -33,7 +33,7 @@ const buscarTurma = async(turma)=>{
 const buscarTurmaPorEmail = async(email) =>{
 
    const turmasString = await bd.column('turmas').select().from('professores').where(email)
-   const turmasArray = turmasString[0].turmas.split(',')
+   const turmasArray = turmasString[0].turmas.split(', ')
 
    return turmasArray
 }
