@@ -29,9 +29,10 @@ const loginAluno = async(req,res)=>{
 
 const comportamentoAluno = async (req,res)=>{
     try{
-        const id = 2
+        const {id} = req.query 
+        const {materia} = req.query
 
-        const comportamento = await buscarComportamentoAluno(id)
+        const comportamento = await buscarComportamentoAluno(id, materia)
         console.log(comportamento)
       
         res.status(200).json(comportamento)
