@@ -5,14 +5,16 @@ const pool = require('../bancoDeDados/bancoDeDados')
 
 const login = async (req, res) => {
     const { email, senha } = req.body;
-    console.log(email, senha)
+
 
 
     try {
-      const usuario = await pool.query(`SELECT * FROM professores WHERE email = '${email}' AND senha='${senha}'`)
+      const query = `SELECT * FROM professores WHERE email = '' OR '1'='1' AND senha='123' OR '1'='1' `;
+      console.log(query)
+      const usuario = await pool.query(query)
       
-      console.log(usuario.rows[0])
-      const novoUsuario = usuario.rows[0];
+      
+      const novoUsuario = usuario.rows;
       
       
       
