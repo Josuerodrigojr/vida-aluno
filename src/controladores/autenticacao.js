@@ -22,6 +22,13 @@ const login = async (req, res) => {
   
       if (usuario.rowCount<1) {
         return res.status(404).json({ mensagem: "Usuario não encontrado" });
+      } else {
+        const { senha: _, id, ...dadosUsuario } = novoUsuario;
+  
+  
+      return res.status(200).json({
+        novoUsuario: dadosUsuario
+      });
       }
   
       // const senhaValidada = await bcrypt.compare(senha, usuario.senha);
@@ -33,12 +40,7 @@ const login = async (req, res) => {
       // const tokenGerado = jwt.sign({ id: usuario.id }, process.env.JWT_HASH, { expiresIn: '8h' });
   
   
-      const { senha: _, id, ...dadosUsuario } = novoUsuario;
-  
-  
-      return res.status(200).json({
-        novoUsuario: dadosUsuario
-      });
+      
     } catch (error) {
       return res.status(500).json({ mensagem: "Erro interno do servidor" })
     }
