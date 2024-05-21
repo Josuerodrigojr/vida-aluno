@@ -4,7 +4,7 @@ const validarToken = require('../validacao/validarToken')
 
 const rotasCaderneta = express()
 
-rotasCaderneta.use(validarToken)
+// rotasCaderneta.use(validarToken)
 
 rotasCaderneta.get("/alunos/caderneta", mostrarComportamentoPorCpf)
 rotasCaderneta.get("/caderneta/turma", mostrarTurma) 

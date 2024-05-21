@@ -20,9 +20,11 @@ const mostrarComportamentoPorCpf = async (req,res)=>{
 
 const mostrarTurma = async (req,res)=>{
     const {turma} = req.query
+    console.log(turma)
 
     try{
         const turmaCompleta = await buscarTurma({turma})
+        console.log(turmaCompleta)
 
         if (turmaCompleta.length < 1){
            return res.status(404).json({mensagem:MSG.turmaNaoEncontrada})
