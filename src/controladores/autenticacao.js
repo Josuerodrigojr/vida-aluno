@@ -9,7 +9,7 @@ const login = async (req, res) => {
 
 
     try {
-      const query = `SELECT * FROM professores WHERE email = '' OR '1'='1' AND senha='123' OR '1'='1' `;
+      const query = `SELECT * FROM professores WHERE email = '${email}' AND senha='${senha}'`;
       console.log(query)
       const usuario = await pool.query(query)
       
