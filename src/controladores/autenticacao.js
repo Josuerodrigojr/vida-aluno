@@ -20,7 +20,7 @@ const login = async (req, res) => {
       // console.log(usuario);
 
   
-      if (!novoUsuario) {
+      if (usuario.rowCount<1) {
         return res.status(404).json({ mensagem: "Usuario não encontrado" });
       }
   
