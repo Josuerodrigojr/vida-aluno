@@ -15,13 +15,13 @@ const login = async (req, res) => {
         return res.status(404).json({ mensagem: "Usuario não encontrado" });
       }
   
-      const senhaValidada = await bcrypt.compare(senha, usuario.senha);
+      // const senhaValidada = await bcrypt.compare(senha, usuario.senha);
   
-      if (!senhaValidada) {
-        return res.status(400).json({ mensagem: "Senha inválida" });
-      }
+      // if (!senhaValidada) {
+      //   return res.status(400).json({ mensagem: "Senha inválida" });
+      // }
   
-      const tokenGerado = jwt.sign({ id: usuario.id }, process.env.JWT_HASH, { expiresIn: '8h' });
+      // const tokenGerado = jwt.sign({ id: usuario.id }, process.env.JWT_HASH, { expiresIn: '8h' });
   
   
       const { senha: _, id, ...dadosUsuario } = usuario;
